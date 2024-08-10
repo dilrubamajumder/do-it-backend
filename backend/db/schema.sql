@@ -1,4 +1,4 @@
-DROP DATABASE IS EXISTS do_it;
+DROP DATABASE IF EXISTS do_it;
 CREATE DATABASE do_it;
 
 \c do_it;
@@ -9,4 +9,4 @@ CREATE TABLE tasks (
     task TEXT NOT NULL,
     due_date date,
     status VARCHAR(50) DEFAULT 'pending'
-)
+);
