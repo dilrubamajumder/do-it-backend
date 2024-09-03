@@ -16,6 +16,7 @@ const getTask = async (id) => {
     try{
         const oneTask = await db.one('SELECT * FROM tasks WHERE id=$1', id)
         return oneTask
+
     }catch(error){
         return error
     }
@@ -23,11 +24,63 @@ const getTask = async (id) => {
 
 // create
 
+const createTask = async (task) =>{
+    try {
+        const newTask = await db.one(
+            'INSERT INTO tasks (task, due_date, status) VALUES ($1, $2, $3) RETURNING *',
+            [
+                task.task, 
+                task.due_date, 
+                task.status
+            ]
+        );
+        return newTask
+
+    } catch (error) {
+        return error
+    }
+}
+
 // update
+
+const updateTask = async(id, task) => {
+    try {
+        const changedTask = await db.one(
+            'UPDATE tasks SET task=$1, due_date=$2, status=$3 WHERE id=$4 RETURNING *',
+            [
+                task.task, 
+                task.due_date, 
+                task.status, 
+                id
+            ]
+        );
+        return changedTask
+
+    } catch (error) {
+        return error
+    }
+}
 
 
 //delete
+const deleteTask = async(id) =>{
+    try {
+        const deletedTask = await db.one(
+            'DELETE FROM tasks WHERE id=$1 RETURNING *',
+            id
+        )
+        return deletedTask
+    } catch (error) {
+        return error
+    }
+}
 
 
 
-module.exports = {getAllTasks, getTask}
+module.exports = {
+    getAllTasks, 
+    getTask, 
+    createTask, 
+    updateTask,
+    deleteTask
+}
