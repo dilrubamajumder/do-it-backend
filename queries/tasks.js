@@ -27,9 +27,9 @@ const getTask = async (id) => {
 const createTask = async (task) =>{
     try {
         const newTask = await db.one(
-            'INSERT INTO tasks (task, due_date, status) VALUES ($1, $2, $3) RETURNING *',
+            'INSERT INTO tasks (description, due_date, status) VALUES ($1, $2, $3) RETURNING *',
             [
-                task.task, 
+                task.description, 
                 task.due_date, 
                 task.status
             ]
@@ -46,9 +46,9 @@ const createTask = async (task) =>{
 const updateTask = async(id, task) => {
     try {
         const changedTask = await db.one(
-            'UPDATE tasks SET task=$1, due_date=$2, status=$3 WHERE id=$4 RETURNING *',
+            'UPDATE tasks SET description=$1, due_date=$2, status=$3 WHERE id=$4 RETURNING *',
             [
-                task.task, 
+                task.description, 
                 task.due_date, 
                 task.status, 
                 id

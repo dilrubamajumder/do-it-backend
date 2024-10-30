@@ -6,7 +6,7 @@ CREATE DATABASE do_it;
 DROP TABLE IF EXISTS tasks;
 CREATE TABLE tasks (
     id SERIAL primary key,
-    task TEXT NOT NULL,
+    description TEXT NOT NULL,
     due_date date,
     status VARCHAR(50) DEFAULT 'pending'
 );

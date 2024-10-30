@@ -1,7 +1,7 @@
 const express = require('express');
 const tasks = express.Router();
 const {getAllTasks, getTask, createTask, updateTask, deleteTask} = require('../queries/tasks')
-const {checkDescription} = require('../validation/checkTasks');
+const {checkDescription} = require('../validation/checkDescription');
 
 
 
@@ -34,6 +34,7 @@ tasks.get('/:id', async (req, res) => {
 tasks.post('/', checkDescription, async (req, res) => {
     try {
         const task = await createTask(req.body);
+        console.log(task, 'task created')
         res.status(201).json(task)
     } catch (error) {
         res.status(400).json({error: 'Unable to add new task'})
