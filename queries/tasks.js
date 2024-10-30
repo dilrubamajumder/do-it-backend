@@ -76,7 +76,6 @@ const deleteTask = async(id) =>{
 }
 
 
-
 module.exports = {
     getAllTasks, 
     getTask, 
